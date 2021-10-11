@@ -1,5 +1,5 @@
 # 897087395177054278
-# ODk3MDg3Mzk1MTc3MDU0Mjc4.YWQjvg.1_Jef0zy6GgGsjC7J1lEGbwvtTI
+# ODk3MDg3Mzk1MTc3MDU0Mjc4.YWQjvg.gCwlc40dvDysnQPK_l14TprrwHE
 # 534723950656
 import discord
 
@@ -20,4 +20,4 @@ async def on_message(message):
         await client.logout()
 
 
-client.run('ODk3MDg3Mzk1MTc3MDU0Mjc4.YWQjvg.1_Jef0zy6GgGsjC7J1lEGbwvtTI')
+client.run('ODk3MDg3Mzk1MTc3MDU0Mjc4.YWQjvg.gCwlc40dvDysnQPK_l14TprrwHE')
