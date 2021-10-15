@@ -1,34 +1,39 @@
-
 import discord
-import json
-import os
+from discord.ext import commands
+import os #ไปดึงpathไฟล์จากในเครื่อง
+from settings import token, prefix #เอาข้อมูลมาจากไฟล์setting แล้วเอาข้อมูลอะไรมาบ้าง 
 
-client = discord.Client()
-
-if os.path.exists(os.getcwd() + "/config.json"):
-    with open("./config.json") as f:
-        configData = json.load(f)
-        token = configData["Token"]
-        prefix = configData["Prefix"]
-else:
-    token = ""
-    prefix = "!"
-
-@client.event
+bot = commands.Bot(command_prefix=prefix, help_command=None) #คือไอ้โค้ดปกติตรงนี้มันจะมีcommandให้เราอยู่แล้ว แต่เราต้องการสร้างcommandเอง เราเลยตั้งให้มันเป็นnone
+@bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-
-@client.event
+    print(f"We Have Logged In As {bot.user}") #stringformat
+    for file in os.listdir("commands"):
+        if ".py" in file:
+            file = file.split(".py")[0] #ต้องการแค่ชื่อไฟล์เฉยๆ
+            bot.load_extension(f"commands.{file}") #บอทจะไปโหลดentensionจากไฟล์commands
+@bot.event
 async def on_message(message):
-    
-    if message.author == client.user:
+    if message.author == bot.user:
         return
-    
-    msg = message.content.lower().split(prefix)[1].strip().split(" ")
-    if msg[0] == "sunwoo":
-        await message.channel.send('loveeve')
-    elif msg[0] == "theboyz":
-        await message.channel.send('number1 gen4')
+    if message.content.lower().startswith(prefix): #เช็คว่ามันเริ่มต้นprefixที่เราสร้างไว้หรือเปล่า
+        await bot.process_commands(message)
 
 
-client.run(token)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bot.run(token)
+
