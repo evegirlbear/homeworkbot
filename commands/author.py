@@ -8,7 +8,7 @@ class Author(commands.Cog, name="Author"):
 
     @commands.command()
     async def author(self, ctx):
-        embed = discord.Embed(title="it's me", description="i'm student itkmitl", color=colorframe)
+        embed = discord.Embed(title="it's BoTHoMeWorK", description="```i'm 62+64```", color=colorframe)
 
 
         await ctx.channel.send(embed=embed)
