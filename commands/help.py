@@ -19,7 +19,9 @@ class Help(commands.Cog, name="Help"):
         embed.add_field(name="ตัวอย่างการพิมพ์คำสั่ง :",value="```pip!author, pip!homework```", inline=False)
         embed.add_field(name="คำสั่งทั่วไป  :",value="```pip!add : ทำการเพิ่มการบ้านลงไปเล้ย\n\
 pip!homework : โชว์listการบ้านที่เราได้เพิ่มไว้\n\
-pip!deadline : แสดงงานที่ต้องใกล้ส่งภายใน3วัน!!!```", inline=False )
+pip!deadline : แสดงงานที่ต้องใกล้ส่งภายใน3วัน!!!\n\
+pip!logout : ออกจากระบบ เพื่อหนีความจริง```", inline=False )
+        embed.set_thumbnail(url="https://www.apkmirror.com/wp-content/uploads/2021/07/09/60ed4ccf067f1.png") #URLภาพที่อยู่บนขวาของคำสั่ง help
 
         await ctx.channel.send(embed=embed)
 
