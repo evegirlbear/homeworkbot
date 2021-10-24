@@ -1,7 +1,14 @@
 import discord
 from discord.ext import commands
 import os #ไปดึงpathไฟล์จากในเครื่อง
-from settings import token, prefix #เอาข้อมูลมาจากไฟล์setting แล้วเอาข้อมูลอะไรมาบ้าง 
+import firebase_admin
+from firebase_admin import credentials, db
+from settings import * #เอาข้อมูลมาจากไฟล์setting แล้วเอาข้อมูลอะไรมาบ้าง 
+
+cred = credentials.Certificate(firebase_settings)
+firebase_admin.initialize_app(cred, {
+    'databaseURL': database_URL
+})
 
 bot = commands.Bot(command_prefix=prefix, help_command=None) #คือไอ้โค้ดปกติตรงนี้มันจะมีcommandให้เราอยู่แล้ว แต่เราต้องการสร้างcommandเอง เราเลยตั้งให้มันเป็นnone
 @bot.event
