@@ -21,7 +21,7 @@ class Add(commands.Cog, name="Add"):
             }
         })
         embed = discord.Embed(
-        title="pip!เพิ่มการบ้านให้แล้วน้า",
+        title="เค้าเพิ่มการบ้านให้แล้วน้า\n",  description="ดูรายชื่อการบ้าน pip!homework โลดดด",
              color=colorframe
          )
 
