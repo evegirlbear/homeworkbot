@@ -1,38 +1,25 @@
+from os import name
 import discord
 from discord.ext import commands
 from settings import *
+from firebase_admin import db #คือการดึงคำสั่งจากfirebaseมาใช้
 
-list_homework_itkmitl = [
-  {
-    "name": "ITF",
-    "description": "การบ้านทำ Assignment",
-  },
-  {
-    "name": "ICS",
-    "description": "การบ้านทำ Assignment Week 5",
-  },
-  {
-    "name": "PSIT",
-    "description": "ทำโจทย์หน้า 1-5",
-  },
-  {
-    "name": "Gen B",
-    "description": "สอบ 25",
-  }
-]
+
 class Homework(commands.Cog, name="Homework"):
 
     def __init__(self, bot : commands.Bot):
         self.bot = bot
     
     @commands.command()
-    async def homework(self, ctx):
+    async def homework(self, ctx): #ctxคือข้อมูลของ"messages" จะบอกแมสเซจนี้ว่ามีไรบ้าง 
+        #ดึงข้อมูลมาจากDatabaseของFirebaseโดยทำการเรียกid discordของแต่ละคน
+        homeworks = db.reference(f"/{ctx.author.id}/homeworks/").get()
         embed = discord.Embed(
-        title="เกิด แก่ เจ็บ ทำการบ้าน เย้เย้\n", description="ห้ามป่วย ห้ามตุย ห้ามเอฟ เฮ้!\n",
+        title="ปิ๊ป ปิ๊ป การบ้านของเธอมีดังนี้จ้า\n", description="ท้อได้ แต่ห้ามถอยน้า เรียนจบไปด้วยกัน ฮึบ\n",
              color=colorframe
-         )
-        for subject in list_homework_itkmitl:
-            embed.add_field(name= f"{subject['name']} มีการบ้านดังนี้ T_T!" ,value= subject["description"], inline=False)
+         ) 
+        for key in homeworks:
+          embed.add_field(name=f"{homeworks[key]['name']} :",value=f"```\n{homeworks[key]['description']}\n{homeworks[key]['deadline']}```", inline=False)
         await ctx.channel.send(embed=embed)
 
 def setup(bot: commands.Bot):
