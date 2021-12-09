@@ -11,12 +11,12 @@ class Warning(commands.Cog, name="Warning"):
         self.bot = bot
 
     @tasks.loop(seconds = 10) 
-    async def warning(self, ctx):
+    async def warning(): #ยังทำไม่สำเร็จไม่รู้ว่าจะเลือกchannelที่แจ้งเตือนchannelไหน"warning()""
         embed = discord.Embed(
         title="Warning!", description=f"แจ้งเตือน",
              color=colorframe
         )
-        await ctx.channel.send(embed=embed)
+        await channel.send(embed=embed)      #ยังทำไม่สำเร็จไม่รู้ว่าจะเลือกchannelที่แจ้งเตือนchannelไหน
 
 
     warning.start()
