@@ -23,13 +23,17 @@ class Warning(commands.Cog, name="Warning"):
             homeworks = db.reference(f"/{ctx.author.id}/homeworks/").get()
             now = datetime.now()
             for key in homeworks:
-                if int(homeworks[key]['deadline'][0:2]) == int(now.strftime("%d"))+1 and homeworks[key]['deadline'][3:5] == now.strftime("%m") and homeworks[key]['deadline'][6:10] == now.strftime("%Y"):
+                if int(homeworks[key]['deadline'][0:2]) == int(now.strftime("%d"))+1 and\
+                    homeworks[key]['deadline'][3:5] == now.strftime("%m") and\
+                    homeworks[key]['deadline'][6:10] == now.strftime("%Y"):
                     embed = discord.Embed(
                         title="%s !" % homeworks[key]['name'], description=f"ใกล้ครบกำหนดส่ง",
                         color=colorframe
                     )
                     await ctx.channel.send(embed=embed)
-                elif int(homeworks[key]['deadline'][0:2]) == int(now.strftime("%d")) and homeworks[key]['deadline'][3:5] == now.strftime("%m") and homeworks[key]['deadline'][6:10] == now.strftime("%Y"):
+                elif int(homeworks[key]['deadline'][0:2]) == int(now.strftime("%d")) and\
+                    homeworks[key]['deadline'][3:5] == now.strftime("%m") and\
+                    homeworks[key]['deadline'][6:10] == now.strftime("%Y"):
                     embed = discord.Embed(
                         title="%s !!!" % homeworks[key]['name'], description=f"ถึงวันกำหนดส่งแล้ว",
                         color=colorframe
