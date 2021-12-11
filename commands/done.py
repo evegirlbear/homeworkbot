@@ -22,7 +22,7 @@ class Done(commands.Cog, name="Done"):
         db.reference(f"/{ctx.author.id}/homeworks/{temp}/").delete()
 
         embed = discord.Embed(
-        title="เย่ทำเสร็จแล้วว\n", description="เหลืออีก %d งาน" %len(homeworks.keys()),
+        title="เย่ทำเสร็จแล้วว\n", description="งานที่เหลือ %d งาน" %(len(homeworks.keys())-1),
              color=colorframe
         )
 
