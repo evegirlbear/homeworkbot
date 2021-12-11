@@ -14,7 +14,7 @@ class Add(commands.Cog, name="Add"):
     async def add(self, ctx, *, attr = ""):
         hw = attr.split()
         #ดึงข้อมูลมาจากDatabaseของFirebaseโดยทำการเรียกid discordของแต่ละคน
-        addhw = db.reference(f"/{ctx.author.id}/homeworks/")      
+        addhw = db.reference(f"/{ctx.author.id}/homeworks/")
         #เมื่อมีการดึงข้อมูลก็ให้firebaseอัพเดตข้อมูลตลอดเวลา
         #ตรงนี้มันคือการอัพเดพข้อมูลแบบเดี่ยว
         # addhw.update({
@@ -24,7 +24,24 @@ class Add(commands.Cog, name="Add"):
         #          "deadline": hw[2]
         #     }
         # })
-        
+        if len(hw) != 3 or len(hw[2]) != 10:
+            embed = discord.Embed(
+            title="ปิ๊ป ข้อมูลไม่ถูกต้อง\n",
+                color=colorframe
+            )
+            embed.add_field(name="ตัวอย่างการใช้ pip!add :",value="```pip!add ชื่องาน รายละเอียด 01/12/2029```", inline=False)
+            await ctx.channel.send(embed=embed)
+            return
+        #เช็กรูปแบบการใส่ข้อมูล
+        check = db.reference(f"/{ctx.author.id}/homeworks/").get()
+        for key in check:
+            if hw[0] == check[key]['name']:
+                embed = discord.Embed(
+                title="ปิ๊ป ชื่องานซ้ำ\n", description="-ลองเปลี่ยนเป็นชื่ออื่นน้าา-",
+                    color=colorframe
+                )
+                await ctx.channel.send(embed=embed)
+                return
         #การอัพเดตข้อมูลแบบเป็นลิสต์ เป็นการส่งข้อมูลขึ้นไป
         addhw.push({
             "name": hw[0],
