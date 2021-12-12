@@ -1,10 +1,9 @@
 import discord
-import firebase_admin
-from discord.ext import commands, tasks
+from discord.ext import commands
 from firebase_admin import db
 from settings import *
 import asyncio
-from datetime import date, datetime
+from datetime import datetime
 
 
 class Warning(commands.Cog, name="Warning"):
@@ -27,17 +26,28 @@ class Warning(commands.Cog, name="Warning"):
                     homeworks[key]['deadline'][3:5] == now.strftime("%m") and\
                     homeworks[key]['deadline'][6:10] == now.strftime("%Y"):
                     embed = discord.Embed(
-                        title="%s !" % homeworks[key]['name'], description=f"ใกล้ครบกำหนดส่ง",
+                        title="คุณ %s !" % ctx.author.name, description="%s ใกล้ครบกำหนดส่ง!" % homeworks[key]['name'],
                         color=colorframe
                     )
+                    embed.set_thumbnail(url = ctx.author.avatar_url)
                     await ctx.channel.send(embed=embed)
                 elif int(homeworks[key]['deadline'][0:2]) == int(now.strftime("%d")) and\
                     homeworks[key]['deadline'][3:5] == now.strftime("%m") and\
                     homeworks[key]['deadline'][6:10] == now.strftime("%Y"):
                     embed = discord.Embed(
-                        title="%s !!!" % homeworks[key]['name'], description=f"ถึงวันกำหนดส่งแล้ว",
+                        title="คุณ %s !!" % ctx.author.name, description="%s ถึงวันกำหนดส่งแล้ว!!" % homeworks[key]['name'],
                         color=colorframe
                     )
+                    embed.set_thumbnail(url = ctx.author.avatar_url)
+                    await ctx.channel.send(embed=embed)
+                elif int(homeworks[key]['deadline'][0:2]) < int(now.strftime("%d")) and\
+                    homeworks[key]['deadline'][3:5] <= now.strftime("%m") and\
+                    homeworks[key]['deadline'][6:10] <= now.strftime("%Y"):
+                    embed = discord.Embed(
+                        title="คุณ %s !!!" % ctx.author.name, description="%s เลยเวลากำหนดส่งแแล้วนะ!!!" % homeworks[key]['name'],
+                        color=colorframe
+                    )
+                    embed.set_thumbnail(url = ctx.author.avatar_url)
                     await ctx.channel.send(embed=embed)
             await asyncio.sleep(60)  # delay การแจ้งเตือน ใส่เลขเป็นวินาทีคิดว่าน่าจะใช้ที่ 3600
 

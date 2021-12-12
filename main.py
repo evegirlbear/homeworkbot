@@ -1,4 +1,3 @@
-import discord
 from discord.ext import commands
 import os #ไปดึงpathไฟล์จากในเครื่อง
 import firebase_admin

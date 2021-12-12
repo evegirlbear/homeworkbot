@@ -1,5 +1,4 @@
 import discord
-import firebase_admin
 from discord.ext import commands
 from commands.homework import Homework
 from settings import *

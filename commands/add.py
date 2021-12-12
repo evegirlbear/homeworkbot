@@ -1,5 +1,4 @@
 import discord
-import firebase_admin
 from discord.ext import commands
 from settings import *
 from firebase_admin import db
