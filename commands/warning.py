@@ -23,7 +23,7 @@ class Warning(commands.Cog, name="Warning"):
             homeworks = db.reference(f"/{ctx.author.id}/homeworks/").get()
             now = datetime.now()
             key = 0
-            while key < len(homeworks):
+            for key in homeworks:
                 if int(homeworks[key]['deadline'][0:2]) == int(now.strftime("%d"))+1 and\
                     homeworks[key]['deadline'][3:5] == now.strftime("%m") and\
                     homeworks[key]['deadline'][6:10] == now.strftime("%Y"):
@@ -32,7 +32,6 @@ class Warning(commands.Cog, name="Warning"):
                         color=colorframe
                     )
                     embed.set_thumbnail(url = ctx.author.avatar_url)
-                    key += 1
                     await ctx.channel.send(embed=embed)
                 elif int(homeworks[key]['deadline'][0:2]) == int(now.strftime("%d")) and\
                     homeworks[key]['deadline'][3:5] == now.strftime("%m") and\
@@ -42,7 +41,6 @@ class Warning(commands.Cog, name="Warning"):
                         color=colorframe
                     )
                     embed.set_thumbnail(url = ctx.author.avatar_url)
-                    key += 1
                     await ctx.channel.send(embed=embed)
                 elif int(homeworks[key]['deadline'][0:2]) < int(now.strftime("%d")) and\
                     homeworks[key]['deadline'][3:5] <= now.strftime("%m") and\
@@ -53,9 +51,7 @@ class Warning(commands.Cog, name="Warning"):
                     )
                     embed.set_thumbnail(url = ctx.author.avatar_url)
                     await ctx.channel.send(embed=embed)
-                else:
-                    key += 1
-            await asyncio.sleep(60)  # delay การแจ้งเตือน ใส่เลขเป็นวินาทีคิดว่าน่าจะใช้ที่ 3600
+            await asyncio.sleep(600)  # delay การแจ้งเตือน ใส่เลขเป็นวินาทีคิดว่าน่าจะใช้ที่ 3600
 
 
 def setup(bot: commands.Bot):
