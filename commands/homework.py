@@ -17,7 +17,8 @@ class Homework(commands.Cog, name="Homework"):
         embed = discord.Embed(
         title="ปิ๊ป ปิ๊ป การบ้านของเธอมีดังนี้จ้า\n", description="ท้อได้ แต่ห้ามถอยน้า เรียนจบไปด้วยกัน ฮึบ\n",
              color=colorframe
-         ) 
+        )
+        embed.set_thumbnail(url = ctx.author.avatar_url)
         for key in homeworks:
           embed.add_field(name=f"{homeworks[key]['name']} :",value=f"```\n{homeworks[key]['description']}\n{homeworks[key]['deadline']}```", inline=False)
         await ctx.channel.send(embed=embed)

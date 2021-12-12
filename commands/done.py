@@ -21,9 +21,10 @@ class Done(commands.Cog, name="Done"):
         db.reference(f"/{ctx.author.id}/homeworks/{temp}/").delete()
 
         embed = discord.Embed(
-        title="เย่ทำเสร็จแล้วว\n", description="งานที่เหลือ %d งาน" %(len(homeworks.keys())-1),
+        title="เย้ทำเสร็จแล้วว\n", description="งานที่เหลือ %d งาน" %(len(homeworks.keys())-1),
              color=colorframe
         )
+        embed.set_thumbnail(url = ctx.author.avatar_url)
 
         await ctx.channel.send(embed=embed)
 
