@@ -52,7 +52,7 @@ class Warning(commands.Cog, name="Warning"):
                     )
                     embed.set_thumbnail(url = ctx.author.avatar_url)
                     await ctx.channel.send(embed=embed)
-            await asyncio.sleep(60)  # delay การแจ้งเตือน ใส่เลขเป็นวินาทีคิดว่าน่าจะใช้ที่ 3600 ทุก ๆ 1 ชั่วโมง
+            await asyncio.sleep(3600)  # delay การแจ้งเตือน ใส่เลขเป็นวินาทีคิดว่าน่าจะใช้ที่ 3600 ทุก ๆ 1 ชั่วโมง
 
 
 def setup(bot: commands.Bot):
